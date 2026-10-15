@@ -52,7 +52,7 @@ export default class SimpleBlurShellPreferences extends ExtensionPreferences {
         const settings = this.getSettings();
 
         const page = new Adw.PreferencesPage({
-            title: 'Blur Bar',
+            title: 'Simple Blur Shell',
             icon_name: 'preferences-desktop-appearance-symbolic',
         });
 

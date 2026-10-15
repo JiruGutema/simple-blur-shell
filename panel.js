@@ -28,20 +28,20 @@ export class TopBarBlurManager {
 
         // Container actor with zero allocated size so it does not affect panelBox layout
         this._bgGroup = new Meta.BackgroundGroup({
-            name: 'blur-bar-bg-group',
+            name: 'simple-blur-shell-bg-group',
             width: 0,
             height: 0,
         });
 
         // The widget that holds the blur effect and optional color tint
         this._bgWidget = new St.Widget({
-            name: 'blur-bar-widget',
-            style_class: 'blur-bar-widget',
+            name: 'simple-blur-shell-widget',
+            style_class: 'simple-blur-shell-widget',
             reactive: false,
         });
 
         this._blurEffect = new Shell.BlurEffect({
-            name: 'blur-bar-effect',
+            name: 'simple-blur-shell-effect',
             mode: Shell.BlurMode.BACKGROUND,
         });
 
@@ -52,12 +52,12 @@ export class TopBarBlurManager {
         // wallpaper actor itself; on the actor it gets redone whenever anything
         // repaints under the panel. Sits below _bgWidget so the tint stays on top.
         this._staticWidget = new St.Widget({
-            name: 'blur-bar-static-widget',
+            name: 'simple-blur-shell-static-widget',
             reactive: false,
             visible: false,
         });
         this._staticWidget.add_effect(new Shell.BlurEffect({
-            name: 'blur-bar-static',
+            name: 'simple-blur-shell-static',
             mode: Shell.BlurMode.ACTOR,
         }));
 
@@ -191,7 +191,7 @@ export class TopBarBlurManager {
         this._blurEffect.radius = scaledRadius;
         this._blurEffect.brightness = brightness;
 
-        const staticEffect = this._staticWidget.get_effect('blur-bar-static');
+        const staticEffect = this._staticWidget.get_effect('simple-blur-shell-static');
         staticEffect.radius = scaledRadius;
         staticEffect.brightness = brightness;
 
@@ -283,11 +283,11 @@ export class TopBarBlurManager {
 
         if (shouldBlur) {
             this._bgWidget.show();
-            Main.panel.add_style_class_name('blur-bar-active');
+            Main.panel.add_style_class_name('simple-blur-shell-active');
             this._blurEffect?.queue_repaint();
         } else {
             this._bgWidget.hide();
-            Main.panel.remove_style_class_name('blur-bar-active');
+            Main.panel.remove_style_class_name('simple-blur-shell-active');
         }
     }
 
@@ -422,7 +422,7 @@ export class TopBarBlurManager {
         themeContext.disconnectObject(this);
 
         // Remove panel class
-        Main.panel.remove_style_class_name('blur-bar-active');
+        Main.panel.remove_style_class_name('simple-blur-shell-active');
 
         // Destroy actors
         this._destroyStaticBackground();

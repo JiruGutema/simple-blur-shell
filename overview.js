@@ -8,7 +8,7 @@ import * as Workspace from 'resource:///org/gnome/shell/ui/workspace.js';
 import { tintStyle } from './utils.js';
 
 // Indexed by the ComponentsStyle enum: default, dark, transparent
-const COMPONENT_STYLE_CLASSES = [null, 'blur-bar-overview-dark', 'blur-bar-overview-transparent'];
+const COMPONENT_STYLE_CLASSES = [null, 'simple-blur-shell-overview-dark', 'simple-blur-shell-overview-transparent'];
 
 export class OverviewBlurManager {
     constructor(settings) {
@@ -29,7 +29,7 @@ export class OverviewBlurManager {
         // overview group and blur that. The overview group is only visible
         // during the overview, so this costs nothing the rest of the time.
         this._bgGroup = new Meta.BackgroundGroup({
-            name: 'blur-bar-overview-group',
+            name: 'simple-blur-shell-overview-group',
             reactive: false,
         });
         Main.layoutManager.overviewGroup.insert_child_at_index(this._bgGroup, 0);
@@ -118,19 +118,19 @@ export class OverviewBlurManager {
     }
 
     _addEffect(actor) {
-        if (!actor || actor.get_effect('blur-bar-overview'))
+        if (!actor || actor.get_effect('simple-blur-shell-overview'))
             return;
 
         // ACTOR mode blurs the wallpaper once and caches the result
         actor.add_effect(new Shell.BlurEffect({
-            name: 'blur-bar-overview',
+            name: 'simple-blur-shell-overview',
             mode: Shell.BlurMode.ACTOR,
         }));
         this._updateEffect(actor);
     }
 
     _updateEffect(actor) {
-        const effect = actor?.get_effect('blur-bar-overview');
+        const effect = actor?.get_effect('simple-blur-shell-overview');
         if (!effect)
             return;
 

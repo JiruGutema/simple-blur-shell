@@ -1,4 +1,4 @@
-# Blur Bar
+# Simple Blur Shell
 
 Lightweight blur for the GNOME Shell top bar and the Activities overview.
 

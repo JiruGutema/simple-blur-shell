@@ -1,42 +1,42 @@
-/* Blur Bar Stylesheet */
+/* Simple Blur Shell Stylesheet */
 
-#panel.blur-bar-active {
+#panel.simple-blur-shell-active {
     background-color: transparent !important;
     box-shadow: none !important;
     transition-duration: 250ms;
 }
 
-.blur-bar-widget {
+.simple-blur-shell-widget {
     transition-duration: 250ms;
 }
 
 /* Overview components restyled to blend with the blurred background */
-.blur-bar-overview-dark .search-entry,
-.blur-bar-overview-dark .search-entry:focus {
+.simple-blur-shell-overview-dark .search-entry,
+.simple-blur-shell-overview-dark .search-entry:focus {
     color: white;
     background-color: rgba(0, 0, 0, 0.3) !important;
     border-color: transparent;
     box-shadow: none;
 }
 
-.blur-bar-overview-dark #dash .dash-background,
-.blur-bar-overview-dark .search-section-content,
-.blur-bar-overview-dark .overview-tile.app-folder,
-.blur-bar-overview-dark .page-navigation-arrow {
+.simple-blur-shell-overview-dark #dash .dash-background,
+.simple-blur-shell-overview-dark .search-section-content,
+.simple-blur-shell-overview-dark .overview-tile.app-folder,
+.simple-blur-shell-overview-dark .page-navigation-arrow {
     background-color: rgba(0, 0, 0, 0.3) !important;
 }
 
-.blur-bar-overview-transparent .search-entry,
-.blur-bar-overview-transparent .search-entry:focus {
+.simple-blur-shell-overview-transparent .search-entry,
+.simple-blur-shell-overview-transparent .search-entry:focus {
     color: white;
     background-color: rgba(255, 255, 255, 0.15) !important;
     border-color: transparent;
     box-shadow: none;
 }
 
-.blur-bar-overview-transparent #dash .dash-background,
-.blur-bar-overview-transparent .search-section-content,
-.blur-bar-overview-transparent .overview-tile.app-folder,
-.blur-bar-overview-transparent .page-navigation-arrow {
+.simple-blur-shell-overview-transparent #dash .dash-background,
+.simple-blur-shell-overview-transparent .search-section-content,
+.simple-blur-shell-overview-transparent .overview-tile.app-folder,
+.simple-blur-shell-overview-transparent .page-navigation-arrow {
     background-color: rgba(255, 255, 255, 0.12) !important;
 }
