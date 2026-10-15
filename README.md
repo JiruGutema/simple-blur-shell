@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/icon.svg" alt="Simple Blur Shell icon" width="128">
+</p>
+
 # Simple Blur Shell
 
 Lightweight blur for the GNOME Shell top bar and the Activities overview.
