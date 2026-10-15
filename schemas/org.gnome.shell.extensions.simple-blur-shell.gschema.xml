@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="simple-blur-shell">
+  <enum id="org.gnome.shell.extensions.simple-blur-shell.TintMode">
+    <value nick="none" value="0"/>
+    <value nick="dark" value="1"/>
+    <value nick="light" value="2"/>
+    <value nick="black" value="3"/>
+  </enum>
+
+  <enum id="org.gnome.shell.extensions.simple-blur-shell.SmartMode">
+    <value nick="always" value="0"/>
+    <value nick="unblur-maximized" value="1"/>
+  </enum>
+
+  <enum id="org.gnome.shell.extensions.simple-blur-shell.BlurMode">
+    <value nick="dynamic" value="0"/>
+    <value nick="static" value="1"/>
+  </enum>
+
+  <enum id="org.gnome.shell.extensions.simple-blur-shell.ComponentsStyle">
+    <value nick="default" value="0"/>
+    <value nick="dark" value="1"/>
+    <value nick="transparent" value="2"/>
+  </enum>
+
+  <schema id="org.gnome.shell.extensions.simple-blur-shell" path="/org/gnome/shell/extensions/simple-blur-shell/">
+    <!-- Panel Blur -->
+    <key name="topbar-blur-enabled" type="b">
+      <default>true</default>
+      <summary>Enable top bar blur</summary>
+      <description>Whether the top bar (panel) has a blurred background.</description>
+    </key>
+    <key name="topbar-blur-radius" type="i">
+      <default>30</default>
+      <range min="0" max="120"/>
+      <summary>Top bar blur radius</summary>
+      <description>Blur radius / strength in pixels.</description>
+    </key>
+    <key name="topbar-blur-brightness" type="i">
+      <default>85</default>
+      <range min="10" max="100"/>
+      <summary>Top bar brightness percentage</summary>
+      <description>Brightness percentage (10% to 100%).</description>
+    </key>
+    <key name="topbar-tint-mode" enum="org.gnome.shell.extensions.simple-blur-shell.TintMode">
+      <default>'none'</default>
+      <summary>Top bar tint mode</summary>
+      <description>Color overlay on the blurred top bar (none, dark, light, black).</description>
+    </key>
+    <key name="topbar-tint-opacity" type="i">
+      <default>35</default>
+      <range min="0" max="100"/>
+      <summary>Top bar tint opacity</summary>
+      <description>Opacity percentage of the tint color overlay.</description>
+    </key>
+    <key name="topbar-blur-mode" enum="org.gnome.shell.extensions.simple-blur-shell.BlurMode">
+      <default>'static'</default>
+      <summary>Top bar blur mode</summary>
+      <description>Dynamic blurs whatever is behind the bar, including windows. Static only blurs the wallpaper once and is much cheaper.</description>
+    </key>
+    <key name="topbar-smart-mode" enum="org.gnome.shell.extensions.simple-blur-shell.SmartMode">
+      <default>'always'</default>
+      <summary>Top bar smart behavior</summary>
+      <description>Whether to disable blur when a window is maximized or touches the top bar.</description>
+    </key>
+    <key name="topbar-unblur-in-overview" type="b">
+      <default>true</default>
+      <summary>Unblur in overview</summary>
+      <description>Whether to disable blur when opening the overview.</description>
+    </key>
+    <key name="topbar-corner-radius" type="i">
+      <default>0</default>
+      <range min="0" max="50"/>
+      <summary>Top bar corner radius</summary>
+      <description>Corner radius for rounded or floating top bars in pixels.</description>
+    </key>
+
+    <!-- Overview Blur -->
+    <key name="overview-blur-enabled" type="b">
+      <default>true</default>
+      <summary>Enable overview blur</summary>
+      <description>Whether the desktop wallpaper is blurred during the overview.</description>
+    </key>
+    <key name="overview-blur-radius" type="i">
+      <default>30</default>
+      <range min="0" max="120"/>
+      <summary>Overview blur radius</summary>
+      <description>Blur radius / strength in pixels for the overview background.</description>
+    </key>
+    <key name="overview-blur-brightness" type="i">
+      <default>70</default>
+      <range min="10" max="100"/>
+      <summary>Overview brightness percentage</summary>
+      <description>Brightness percentage for the blurred overview background (10% to 100%).</description>
+    </key>
+    <key name="overview-tint-mode" enum="org.gnome.shell.extensions.simple-blur-shell.TintMode">
+      <default>'none'</default>
+      <summary>Overview tint mode</summary>
+      <description>Color overlay on the blurred overview background (none, dark, light, black).</description>
+    </key>
+    <key name="overview-tint-opacity" type="i">
+      <default>35</default>
+      <range min="0" max="100"/>
+      <summary>Overview tint opacity</summary>
+      <description>Opacity percentage of the tint color overlay.</description>
+    </key>
+    <key name="overview-corner-radius" type="i">
+      <default>30</default>
+      <range min="0" max="60"/>
+      <summary>Overview workspace corner radius</summary>
+      <description>Corner radius in pixels of the workspace previews in the overview. GNOME's default is 30.</description>
+    </key>
+    <key name="overview-components-style" enum="org.gnome.shell.extensions.simple-blur-shell.ComponentsStyle">
+      <default>'default'</default>
+      <summary>Overview components style</summary>
+      <description>Restyle the search entry, dash and workspace thumbnails so they blend with the blur (default, dark, transparent).</description>
+    </key>
+  </schema>
+</schemalist>
