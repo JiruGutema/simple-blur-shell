@@ -56,6 +56,8 @@ export class TopBarBlurManager {
             reactive: false,
             visible: false,
         });
+        // Start fully clipped; without a clip it would cover the whole monitor
+        this._staticWidget.set_clip(0, 0, 0, 0);
         this._staticWidget.add_effect(new Shell.BlurEffect({
             name: 'simple-blur-shell-static',
             mode: Shell.BlurMode.ACTOR,
@@ -228,13 +230,12 @@ export class TopBarBlurManager {
             return;
 
         // Line the wallpaper up with the monitor, wherever the panel is, then
-        // clip it to the panel's area
-        const [gx, gy] = this._bgGroup.get_transformed_position();
-        if (!Number.isFinite(gx) || !Number.isFinite(gy))
-            return;
-
-        const wx = monitor.x - gx;
-        const wy = monitor.y - gy;
+        // clip it to the panel's area. Use the panel box's position rather
+        // than the transformed position, which is NaN until the stage has
+        // been laid out (as it is when the extension is enabled at login).
+        const [bx, by] = Main.layoutManager.panelBox.get_position();
+        const wx = monitor.x - bx;
+        const wy = monitor.y - by;
         this._staticWidget.set_position(wx, wy);
         this._staticWidget.set_size(monitor.width, monitor.height);
 
