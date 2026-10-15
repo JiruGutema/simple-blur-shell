@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3584e4"/>
+      <stop offset="1" stop-color="#9141ac"/>
+    </linearGradient>
+    <clipPath id="tile">
+      <rect x="8" y="8" width="112" height="112" rx="24"/>
+    </clipPath>
+    <clipPath id="bar">
+      <rect x="8" y="8" width="112" height="34"/>
+    </clipPath>
+    <filter id="blur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+    <!-- The "wallpaper": sky, sun and two hills -->
+    <g id="wallpaper">
+      <rect x="0" y="0" width="128" height="128" fill="url(#sky)"/>
+      <circle cx="86" cy="40" r="20" fill="#f6d32d"/>
+      <path d="M0 98 Q36 62 74 92 T128 84 V128 H0 Z" fill="#33d17a"/>
+      <path d="M0 112 Q50 86 128 108 V128 H0 Z" fill="#26a269"/>
+    </g>
+  </defs>
+
+  <g clip-path="url(#tile)">
+    <use href="#wallpaper"/>
+
+    <!-- Top bar: the same wallpaper, blurred and frosted -->
+    <g clip-path="url(#bar)">
+      <use href="#wallpaper" filter="url(#blur)"/>
+      <rect x="8" y="8" width="112" height="34" fill="#ffffff" fill-opacity="0.28"/>
+    </g>
+    <rect x="8" y="41" width="112" height="1.5" fill="#ffffff" fill-opacity="0.5"/>
+
+    <!-- Bar contents: activities pill and clock -->
+    <rect x="22" y="22" width="16" height="7" rx="3.5" fill="#ffffff"/>
+    <rect x="52" y="22" width="24" height="7" rx="3.5" fill="#ffffff" fill-opacity="0.85"/>
+  </g>
+</svg>
