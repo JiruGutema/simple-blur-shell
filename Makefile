@@ -3,7 +3,7 @@ EXTDIR = $(HOME)/.local/share/gnome-shell/extensions/$(UUID)
 SCHEMA_DIR = schemas
 ZIP_FILE = $(UUID).shell-extension.zip
 
-SOURCES = extension.js overview.js panel.js prefs.js utils.js stylesheet.css metadata.json
+SOURCES = extension.js overview.js panel.js workspace.js prefs.js utils.js stylesheet.css metadata.json
 SCHEMA_SRC = $(SCHEMA_DIR)/org.gnome.shell.extensions.simple-blur-shell.gschema.xml
 
 .PHONY: all build install uninstall reinstall schemas enable disable restart log clean
@@ -22,6 +22,7 @@ build:
 		--extra-source=overview.js \
 		--extra-source=panel.js \
 		--extra-source=utils.js \
+		--extra-source=workspace.js \
 		--schema=$(SCHEMA_SRC) \
 		--out-dir=.
 	@echo "Done → $(ZIP_FILE)"
