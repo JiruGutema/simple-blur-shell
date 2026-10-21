@@ -7,8 +7,9 @@ import * as Background from 'resource:///org/gnome/shell/ui/background.js';
 import { tintStyle } from './utils.js';
 
 export class WorkspaceSwitchBlurManager {
-    constructor(settings) {
+    constructor(settings, interfaceSettings) {
         this._settings = settings;
+        this._interfaceSettings = interfaceSettings;
         this._bgManagers = new Set();
     }
 
@@ -53,7 +54,8 @@ export class WorkspaceSwitchBlurManager {
             height: actor._monitor?.height ?? 0,
             style: tintStyle(
                 this._settings.get_enum('overview-tint-mode'),
-                this._settings.get_int('overview-tint-opacity')),
+                this._settings.get_int('overview-tint-opacity'),
+                this._interfaceSettings),
         }));
 
         // The actor only lives for the length of the switch

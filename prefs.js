@@ -62,11 +62,12 @@ export default class SimpleBlurShellPreferences extends ExtensionPreferences {
             description: 'Blur effect for the top bar.',
         });
         panelGroup.add(switchRow(settings, 'topbar-blur-enabled', 'Enable', 'Apply blurred background to the top bar'));
-        panelGroup.add(enumComboRow(settings, 'topbar-blur-mode', 'Blur Mode', 'Static only blurs the wallpaper and is much lighter', ['Dynamic', 'Static']));
+        panelGroup.add(enumComboRow(settings, 'topbar-blur-mode', 'Blur Mode', 'Static only blurs the wallpaper and is much lighter; Transparent has no blur', ['Dynamic', 'Static', 'Transparent']));
         panelGroup.add(spinRow(settings, 'topbar-blur-radius', 'Radius', 'Gaussian blur strength in pixels', 0, 120, 5));
         panelGroup.add(spinRow(settings, 'topbar-blur-brightness', 'Brightness', 'Brightness percentage (lower = darker)', 10, 100, 5));
-        panelGroup.add(enumComboRow(settings, 'topbar-tint-mode', 'Tint', 'Color overlay on the blur', ['None', 'Dark', 'Light', 'Black']));
+        panelGroup.add(enumComboRow(settings, 'topbar-tint-mode', 'Tint', 'Color overlay on the blur; Accent follows the system accent color', ['None', 'Dark', 'Light', 'Black', 'Accent']));
         panelGroup.add(spinRow(settings, 'topbar-tint-opacity', 'Tint Opacity', 'Opacity percentage of the tint', 0, 100, 5));
+        panelGroup.add(switchRow(settings, 'topbar-tint-fade', 'Fade Tint', 'Fade the tint out toward the bottom of the bar'));
         panelGroup.add(spinRow(settings, 'topbar-corner-radius', 'Corner Radius', 'Rounded corners for floating panel styles', 0, 50, 2));
         panelGroup.add(enumComboRow(settings, 'topbar-smart-mode', 'Smart Mode', 'Adapt when windows touch the bar', ['Always Blurred', 'Solid on Maximized']));
         panelGroup.add(switchRow(settings, 'topbar-unblur-in-overview', 'Unblur in Overview', 'Disable panel blur during the overview'));
@@ -80,7 +81,7 @@ export default class SimpleBlurShellPreferences extends ExtensionPreferences {
         overviewGroup.add(switchRow(settings, 'overview-blur-enabled', 'Enable', 'Blur wallpaper when overview is open'));
         overviewGroup.add(spinRow(settings, 'overview-blur-radius', 'Radius', 'Gaussian blur strength in pixels', 0, 120, 5));
         overviewGroup.add(spinRow(settings, 'overview-blur-brightness', 'Brightness', 'Brightness percentage (lower = darker)', 10, 100, 5));
-        overviewGroup.add(enumComboRow(settings, 'overview-tint-mode', 'Tint', 'Color overlay on the blur', ['None', 'Dark', 'Light', 'Black']));
+        overviewGroup.add(enumComboRow(settings, 'overview-tint-mode', 'Tint', 'Color overlay on the blur; Accent follows the system accent color', ['None', 'Dark', 'Light', 'Black', 'Accent']));
         overviewGroup.add(spinRow(settings, 'overview-tint-opacity', 'Tint Opacity', 'Opacity percentage of the tint', 0, 100, 5));
         overviewGroup.add(spinRow(settings, 'overview-corner-radius', 'Workspace Corner Radius', 'Rounded corners of the workspace previews (GNOME default: 30)', 0, 60, 2));
         overviewGroup.add(enumComboRow(settings, 'overview-components-style', 'Components Style', 'Restyle the search bar and dash to blend with the blur', ['Default', 'Dark', 'Transparent']));

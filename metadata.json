@@ -1,6 +1,6 @@
 {
   "name": "Simple Blur Shell",
-  "description": "Lightweight blur for the top bar and the Activities overview.\n\n* Static top bar blur that costs about as much as no blur, or dynamic blur that shows windows through the bar\n* Blurred wallpaper behind the overview\n* Adjustable radius, brightness and tint\n* Adjustable corner radius for the workspace previews in the overview",
+  "description": "Lightweight blur for the top bar and the Activities overview.\n\n* Static top bar blur that costs about as much as no blur, dynamic blur that shows windows through the bar, or a fully transparent bar\n* Blurred wallpaper behind the overview\n* Adjustable radius, brightness and tint, including a tint that follows the accent color and light/dark style\n* Tint that fades out toward the bottom of the bar\n* Adjustable corner radius for the workspace previews in the overview",
   "uuid": "simple-blur-shell@jirugutema.github.io",
   "settings-schema": "org.gnome.shell.extensions.simple-blur-shell",
   "gettext-domain": "simple-blur-shell",

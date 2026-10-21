@@ -8,8 +8,9 @@ import * as Background from 'resource:///org/gnome/shell/ui/background.js';
 import { tintStyle } from './utils.js';
 
 export class TopBarBlurManager {
-    constructor(settings) {
+    constructor(settings, interfaceSettings) {
         this._settings = settings;
+        this._interfaceSettings = interfaceSettings;
         this._bgGroup = null;
         this._bgWidget = null;
         this._blurEffect = null;
@@ -86,6 +87,7 @@ export class TopBarBlurManager {
             'changed::topbar-blur-brightness', () => this._updateEffect(),
             'changed::topbar-tint-mode', () => this._updateEffect(),
             'changed::topbar-tint-opacity', () => this._updateEffect(),
+            'changed::topbar-tint-fade', () => this._updateEffect(),
             'changed::topbar-blur-mode', () => this._updateEffect(),
             'changed::topbar-corner-radius', () => this._updateEffect(),
             'changed::topbar-smart-mode', () => {
@@ -93,6 +95,12 @@ export class TopBarBlurManager {
                 this._updateActiveState();
             },
             'changed::topbar-unblur-in-overview', () => this._updateActiveState(),
+            this
+        );
+
+        this._interfaceSettings.connectObject(
+            'changed::accent-color', () => this._updateEffect(),
+            'changed::color-scheme', () => this._updateEffect(),
             this
         );
 
@@ -185,11 +193,14 @@ export class TopBarBlurManager {
         const cornerRadius = this._settings.get_int('topbar-corner-radius');
         const tintMode = this._settings.get_enum('topbar-tint-mode');
         const tintOpacity = this._settings.get_int('topbar-tint-opacity');
-        const isStatic = this._settings.get_enum('topbar-blur-mode') === 1;
+        const tintFade = this._settings.get_boolean('topbar-tint-fade');
+        const blurMode = this._settings.get_enum('topbar-blur-mode');
+        const isStatic = blurMode === 1;
         const themeContext = St.ThemeContext.get_for_stage(global.stage);
         const scaledRadius = Math.round(radius * themeContext.scale_factor);
 
-        this._blurEffect.enabled = enabled && !isStatic;
+        // Transparent mode (2) keeps only the tint
+        this._blurEffect.enabled = enabled && blurMode === 0;
         this._blurEffect.radius = scaledRadius;
         this._blurEffect.brightness = brightness;
 
@@ -202,7 +213,7 @@ export class TopBarBlurManager {
         else
             this._destroyStaticBackground();
 
-        let style = tintStyle(tintMode, tintOpacity);
+        let style = tintStyle(tintMode, tintOpacity, this._interfaceSettings, tintFade);
 
         if (cornerRadius > 0)
             style += `border-radius: ${cornerRadius}px; `;
@@ -414,6 +425,7 @@ export class TopBarBlurManager {
 
         // Disconnect all listeners
         this._settings.disconnectObject(this);
+        this._interfaceSettings.disconnectObject(this);
         Main.panel.disconnectObject(this);
         Main.layoutManager.disconnectObject(this);
         Main.overview.disconnectObject(this);

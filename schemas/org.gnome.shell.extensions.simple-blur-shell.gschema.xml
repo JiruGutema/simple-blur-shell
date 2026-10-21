@@ -5,6 +5,7 @@
     <value nick="dark" value="1"/>
     <value nick="light" value="2"/>
     <value nick="black" value="3"/>
+    <value nick="accent" value="4"/>
   </enum>
 
   <enum id="org.gnome.shell.extensions.simple-blur-shell.SmartMode">
@@ -15,6 +16,7 @@
   <enum id="org.gnome.shell.extensions.simple-blur-shell.BlurMode">
     <value nick="dynamic" value="0"/>
     <value nick="static" value="1"/>
+    <value nick="transparent" value="2"/>
   </enum>
 
   <enum id="org.gnome.shell.extensions.simple-blur-shell.ComponentsStyle">
@@ -45,7 +47,7 @@
     <key name="topbar-tint-mode" enum="org.gnome.shell.extensions.simple-blur-shell.TintMode">
       <default>'none'</default>
       <summary>Top bar tint mode</summary>
-      <description>Color overlay on the blurred top bar (none, dark, light, black).</description>
+      <description>Color overlay on the blurred top bar (none, dark, light, black, accent). Accent follows the system accent color, shaded for the light or dark style.</description>
     </key>
     <key name="topbar-tint-opacity" type="i">
       <default>35</default>
@@ -53,10 +55,15 @@
       <summary>Top bar tint opacity</summary>
       <description>Opacity percentage of the tint color overlay.</description>
     </key>
+    <key name="topbar-tint-fade" type="b">
+      <default>false</default>
+      <summary>Fade top bar tint</summary>
+      <description>Whether the tint fades out to transparent toward the bottom of the top bar.</description>
+    </key>
     <key name="topbar-blur-mode" enum="org.gnome.shell.extensions.simple-blur-shell.BlurMode">
       <default>'static'</default>
       <summary>Top bar blur mode</summary>
-      <description>Dynamic blurs whatever is behind the bar, including windows. Static only blurs the wallpaper once and is much cheaper.</description>
+      <description>Dynamic blurs whatever is behind the bar, including windows. Static only blurs the wallpaper once and is much cheaper. Transparent has no blur, only the tint.</description>
     </key>
     <key name="topbar-smart-mode" enum="org.gnome.shell.extensions.simple-blur-shell.SmartMode">
       <default>'always'</default>
@@ -96,7 +103,7 @@
     <key name="overview-tint-mode" enum="org.gnome.shell.extensions.simple-blur-shell.TintMode">
       <default>'none'</default>
       <summary>Overview tint mode</summary>
-      <description>Color overlay on the blurred overview background (none, dark, light, black).</description>
+      <description>Color overlay on the blurred overview background (none, dark, light, black, accent).</description>
     </key>
     <key name="overview-tint-opacity" type="i">
       <default>35</default>

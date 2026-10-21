@@ -11,8 +11,9 @@ import { tintStyle } from './utils.js';
 const COMPONENT_STYLE_CLASSES = [null, 'simple-blur-shell-overview-dark', 'simple-blur-shell-overview-transparent'];
 
 export class OverviewBlurManager {
-    constructor(settings) {
+    constructor(settings, interfaceSettings) {
         this._settings = settings;
+        this._interfaceSettings = interfaceSettings;
         this._bgGroup = null;
         this._bgManagers = [];
         this._tintWidgets = [];
@@ -51,6 +52,12 @@ export class OverviewBlurManager {
             'changed::overview-tint-opacity', () => this._updateTint(),
             'changed::overview-components-style', () => this._updateVisibility(),
             'changed::overview-corner-radius', () => this._refreshCornerRadius(),
+            this
+        );
+
+        this._interfaceSettings.connectObject(
+            'changed::accent-color', () => this._updateTint(),
+            'changed::color-scheme', () => this._updateTint(),
             this
         );
 
@@ -111,7 +118,8 @@ export class OverviewBlurManager {
     _updateTint() {
         const style = tintStyle(
             this._settings.get_enum('overview-tint-mode'),
-            this._settings.get_int('overview-tint-opacity'));
+            this._settings.get_int('overview-tint-opacity'),
+            this._interfaceSettings);
 
         for (const tint of this._tintWidgets)
             tint.style = style;
@@ -221,6 +229,7 @@ export class OverviewBlurManager {
 
     disable() {
         this._settings.disconnectObject(this);
+        this._interfaceSettings.disconnectObject(this);
         Main.layoutManager.disconnectObject(this);
         Main.layoutManager.overviewGroup.disconnectObject(this);
         St.ThemeContext.get_for_stage(global.stage).disconnectObject(this);
