@@ -6,6 +6,12 @@
     transition-duration: 250ms;
 }
 
+/* The overview style gives the panel a border, which would make the bar
+   taller and push the windows down */
+#panel.simple-blur-shell-active:overview {
+    border-width: 0;
+}
+
 .simple-blur-shell-widget {
     transition-duration: 250ms;
 }
