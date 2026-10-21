@@ -6,9 +6,13 @@ ZIP_FILE = $(UUID).shell-extension.zip
 SOURCES = extension.js overview.js panel.js workspace.js prefs.js utils.js stylesheet.css metadata.json
 SCHEMA_SRC = $(SCHEMA_DIR)/org.gnome.shell.extensions.simple-blur-shell.gschema.xml
 
-.PHONY: all build install uninstall reinstall schemas enable disable restart log clean
+.PHONY: all build install uninstall reinstall schemas enable disable restart log clean test
 
 all: build
+
+# Run the unit tests
+test:
+	node test/panel.test.js
 
 # Compile GSettings schemas
 schemas: $(SCHEMA_SRC)

@@ -18,6 +18,7 @@ export class TopBarBlurManager {
         this._staticBgManager = null;
         this._syncTimeoutId = 0;
         this._inOverview = false;
+        this._overviewStyle = null;
         this._isBlurred = null;
         this._trackingWindows = false;
         this._windowSignals = new Map();
@@ -134,9 +135,18 @@ export class TopBarBlurManager {
         );
 
         // Overview tracking
+        this._inOverview = Main.overview.visible;
         Main.overview.connectObject(
             'showing', () => {
                 this._inOverview = true;
+                // GNOME puts the panel in the overview style itself, so our
+                // own state of it is stale from here on
+                this._overviewStyle = null;
+                this._updateActiveState();
+            },
+            'hiding', () => {
+                // ... and takes it away again when the overview closes
+                this._overviewStyle = null;
                 this._updateActiveState();
             },
             'hidden', () => {
@@ -287,6 +297,8 @@ export class TopBarBlurManager {
         // with a blur effect would still be rendered offscreen
         this._staticWidget.visible = shouldBlur && this._staticBgManager !== null;
 
+        this._syncOverviewStyle(shouldBlur);
+
         // This runs on every window move in smart mode; only touch the panel
         // when the state actually changes
         if (shouldBlur === this._isBlurred)
@@ -301,6 +313,26 @@ export class TopBarBlurManager {
             this._bgWidget.hide();
             Main.panel.remove_style_class_name('simple-blur-shell-active');
         }
+    }
+
+    // The panel background is the blurred wallpaper, so the foreground colour
+    // of the theme can be unreadable on it. The overview styling is the one
+    // meant for a dark backdrop, so keep the panel in that state while the
+    // blur is on. GNOME toggles the pseudo class itself when the overview
+    // opens and closes, hence the bookkeeping here.
+    _syncOverviewStyle(shouldBlur) {
+        // While the overview is open the pseudo class belongs to GNOME
+        if (!shouldBlur && this._inOverview)
+            return;
+
+        if (shouldBlur === this._overviewStyle)
+            return;
+
+        this._overviewStyle = shouldBlur;
+        if (shouldBlur)
+            Main.panel.add_style_pseudo_class('overview');
+        else
+            Main.panel.remove_style_pseudo_class('overview');
     }
 
     _hasMaximizedOrNearWindow() {
@@ -436,6 +468,8 @@ export class TopBarBlurManager {
 
         // Remove panel class
         Main.panel.remove_style_class_name('simple-blur-shell-active');
+        if (!this._inOverview)
+            Main.panel.remove_style_pseudo_class('overview');
 
         // Destroy actors
         this._destroyStaticBackground();
