@@ -44,16 +44,18 @@ function tintColor(mode, interfaceSettings) {
     return TINT_COLORS[mode];
 }
 
-export function tintStyle(mode, opacityPercent, interfaceSettings, fade = false) {
+// fadePercent is how much of the tint is gone by the bottom; 0 is no fade
+export function tintStyle(mode, opacityPercent, interfaceSettings, fadePercent = 0) {
     const rgb = tintColor(mode, interfaceSettings);
     if (!rgb || opacityPercent <= 0)
         return 'background-color: transparent; ';
 
     const alpha = Math.min(1, opacityPercent / 100);
-    if (fade) {
+    if (fadePercent > 0) {
+        const endAlpha = Math.round(alpha * (1 - Math.min(1, fadePercent / 100)) * 1000) / 1000;
         return 'background-gradient-direction: vertical; ' +
             `background-gradient-start: rgba(${rgb.join(', ')}, ${alpha}); ` +
-            `background-gradient-end: rgba(${rgb.join(', ')}, 0); `;
+            `background-gradient-end: rgba(${rgb.join(', ')}, ${endAlpha}); `;
     }
 
     return `background-color: rgba(${rgb.join(', ')}, ${alpha}); `;

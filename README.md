@@ -15,7 +15,7 @@ Lightweight blur for the GNOME Shell top bar and the Activities overview.
   - Radius, brightness, tint (none, dark, light, black, accent, auto) with adjustable opacity, and corner radius
   - Accent tint follows the system accent color, shaded darker or lighter for the dark or light style
   - Auto tint is dark or light to match the system style, switching when it changes
-  - Optionally fade the tint out toward the bottom of the bar
+  - Optionally fade the tint out toward the bottom of the bar, with an adjustable fade amount
   - Smart mode: turn the blur off when a window is maximized or touches the bar
   - Optionally turn the blur off while the overview is open
 - **Overview blur**

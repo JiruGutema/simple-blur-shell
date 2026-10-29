@@ -68,6 +68,7 @@ export default class SimpleBlurShellPreferences extends ExtensionPreferences {
         panelGroup.add(enumComboRow(settings, 'topbar-tint-mode', 'Tint', 'Color overlay on the blur; Accent follows the system accent color, Auto is dark or light to match the system style', ['None', 'Dark', 'Light', 'Black', 'Accent', 'Auto']));
         panelGroup.add(spinRow(settings, 'topbar-tint-opacity', 'Tint Opacity', 'Opacity percentage of the tint', 0, 100, 5));
         panelGroup.add(switchRow(settings, 'topbar-tint-fade', 'Fade Tint', 'Fade the tint out toward the bottom of the bar'));
+        panelGroup.add(spinRow(settings, 'topbar-tint-fade-amount', 'Fade Amount', 'How much of the tint is faded out by the bottom of the bar (needs Fade Tint)', 0, 100, 5));
         panelGroup.add(spinRow(settings, 'topbar-corner-radius', 'Corner Radius', 'Rounded corners for floating panel styles', 0, 50, 2));
         panelGroup.add(enumComboRow(settings, 'topbar-smart-mode', 'Smart Mode', 'Adapt when windows touch the bar', ['Always Blurred', 'Solid on Maximized']));
         panelGroup.add(switchRow(settings, 'topbar-unblur-in-overview', 'Unblur in Overview', 'Disable panel blur during the overview'));

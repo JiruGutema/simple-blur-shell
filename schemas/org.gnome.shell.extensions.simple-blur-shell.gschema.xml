@@ -59,7 +59,13 @@
     <key name="topbar-tint-fade" type="b">
       <default>false</default>
       <summary>Fade top bar tint</summary>
-      <description>Whether the tint fades out to transparent toward the bottom of the top bar.</description>
+      <description>Whether the tint fades out toward the bottom of the top bar.</description>
+    </key>
+    <key name="topbar-tint-fade-amount" type="i">
+      <default>100</default>
+      <range min="0" max="100"/>
+      <summary>Top bar tint fade amount</summary>
+      <description>How much of the tint is faded out by the bottom of the top bar, as a percentage. 100% fades to fully transparent. Only applies when the tint fade is on.</description>
     </key>
     <key name="topbar-blur-mode" enum="org.gnome.shell.extensions.simple-blur-shell.BlurMode">
       <default>'static'</default>

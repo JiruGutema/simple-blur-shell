@@ -88,6 +88,7 @@ export class TopBarBlurManager {
             'changed::topbar-tint-mode', () => this._updateEffect(),
             'changed::topbar-tint-opacity', () => this._updateEffect(),
             'changed::topbar-tint-fade', () => this._updateEffect(),
+            'changed::topbar-tint-fade-amount', () => this._updateEffect(),
             'changed::topbar-blur-mode', () => this._updateEffect(),
             'changed::topbar-corner-radius', () => this._updateEffect(),
             'changed::topbar-smart-mode', () => {
@@ -193,7 +194,8 @@ export class TopBarBlurManager {
         const cornerRadius = this._settings.get_int('topbar-corner-radius');
         const tintMode = this._settings.get_enum('topbar-tint-mode');
         const tintOpacity = this._settings.get_int('topbar-tint-opacity');
-        const tintFade = this._settings.get_boolean('topbar-tint-fade');
+        const tintFadeAmount = this._settings.get_boolean('topbar-tint-fade')
+            ? this._settings.get_int('topbar-tint-fade-amount') : 0;
         const blurMode = this._settings.get_enum('topbar-blur-mode');
         const isStatic = blurMode === 1;
         const themeContext = St.ThemeContext.get_for_stage(global.stage);
@@ -213,7 +215,7 @@ export class TopBarBlurManager {
         else
             this._destroyStaticBackground();
 
-        let style = tintStyle(tintMode, tintOpacity, this._interfaceSettings, tintFade);
+        let style = tintStyle(tintMode, tintOpacity, this._interfaceSettings, tintFadeAmount);
 
         if (cornerRadius > 0)
             style += `border-radius: ${cornerRadius}px; `;
