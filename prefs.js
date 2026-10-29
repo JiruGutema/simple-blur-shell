@@ -65,7 +65,7 @@ export default class SimpleBlurShellPreferences extends ExtensionPreferences {
         panelGroup.add(enumComboRow(settings, 'topbar-blur-mode', 'Blur Mode', 'Static only blurs the wallpaper and is much lighter; Transparent has no blur', ['Dynamic', 'Static', 'Transparent']));
         panelGroup.add(spinRow(settings, 'topbar-blur-radius', 'Radius', 'Gaussian blur strength in pixels', 0, 120, 5));
         panelGroup.add(spinRow(settings, 'topbar-blur-brightness', 'Brightness', 'Brightness percentage (lower = darker)', 10, 100, 5));
-        panelGroup.add(enumComboRow(settings, 'topbar-tint-mode', 'Tint', 'Color overlay on the blur; Accent follows the system accent color', ['None', 'Dark', 'Light', 'Black', 'Accent']));
+        panelGroup.add(enumComboRow(settings, 'topbar-tint-mode', 'Tint', 'Color overlay on the blur; Accent follows the system accent color, Auto is dark or light to match the system style', ['None', 'Dark', 'Light', 'Black', 'Accent', 'Auto']));
         panelGroup.add(spinRow(settings, 'topbar-tint-opacity', 'Tint Opacity', 'Opacity percentage of the tint', 0, 100, 5));
         panelGroup.add(switchRow(settings, 'topbar-tint-fade', 'Fade Tint', 'Fade the tint out toward the bottom of the bar'));
         panelGroup.add(spinRow(settings, 'topbar-corner-radius', 'Corner Radius', 'Rounded corners for floating panel styles', 0, 50, 2));
@@ -81,7 +81,7 @@ export default class SimpleBlurShellPreferences extends ExtensionPreferences {
         overviewGroup.add(switchRow(settings, 'overview-blur-enabled', 'Enable', 'Blur wallpaper when overview is open'));
         overviewGroup.add(spinRow(settings, 'overview-blur-radius', 'Radius', 'Gaussian blur strength in pixels', 0, 120, 5));
         overviewGroup.add(spinRow(settings, 'overview-blur-brightness', 'Brightness', 'Brightness percentage (lower = darker)', 10, 100, 5));
-        overviewGroup.add(enumComboRow(settings, 'overview-tint-mode', 'Tint', 'Color overlay on the blur; Accent follows the system accent color', ['None', 'Dark', 'Light', 'Black', 'Accent']));
+        overviewGroup.add(enumComboRow(settings, 'overview-tint-mode', 'Tint', 'Color overlay on the blur; Accent follows the system accent color, Auto is dark or light to match the system style', ['None', 'Dark', 'Light', 'Black', 'Accent', 'Auto']));
         overviewGroup.add(spinRow(settings, 'overview-tint-opacity', 'Tint Opacity', 'Opacity percentage of the tint', 0, 100, 5));
         overviewGroup.add(spinRow(settings, 'overview-corner-radius', 'Workspace Corner Radius', 'Rounded corners of the workspace previews (GNOME default: 30)', 0, 60, 2));
         overviewGroup.add(enumComboRow(settings, 'overview-components-style', 'Components Style', 'Restyle the search bar and dash to blend with the blur', ['Default', 'Dark', 'Transparent']));

@@ -12,14 +12,15 @@ Lightweight blur for the GNOME Shell top bar and the Activities overview.
   - *Static* (default): blurs the wallpaper once and reuses it. Costs about the same as no blur.
   - *Dynamic*: blurs whatever is behind the bar, including windows, on every frame. Costs more GPU time.
   - *Transparent*: no blur, just the tint (or nothing) over whatever is behind the bar
-  - Radius, brightness, tint (none, dark, light, black, accent) with adjustable opacity, and corner radius
+  - Radius, brightness, tint (none, dark, light, black, accent, auto) with adjustable opacity, and corner radius
   - Accent tint follows the system accent color, shaded darker or lighter for the dark or light style
+  - Auto tint is dark or light to match the system style, switching when it changes
   - Optionally fade the tint out toward the bottom of the bar
   - Smart mode: turn the blur off when a window is maximized or touches the bar
   - Optionally turn the blur off while the overview is open
 - **Overview blur**
   - Blurred wallpaper behind the overview (static, blurred once)
-  - Radius, brightness, tint (including accent) and tint opacity
+  - Radius, brightness, tint (including accent and auto) and tint opacity
   - Corner radius of the workspace previews
   - Restyle the search bar and dash (dark or transparent) to blend with the blur
 

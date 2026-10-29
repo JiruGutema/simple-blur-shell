@@ -1,7 +1,10 @@
-// RGB values for the TintMode enum: none, dark, light, black (accent is
-// looked up separately)
+// RGB values for the TintMode enum: none, dark, light, black (accent and auto
+// are looked up separately)
 const TINT_COLORS = [null, [20, 20, 20], [240, 240, 240], [0, 0, 0]];
+const TINT_DARK = 1;
+const TINT_LIGHT = 2;
 const TINT_ACCENT = 4;
+const TINT_AUTO = 5;
 
 // libadwaita's accent colors, by org.gnome.desktop.interface accent-color
 const ACCENT_COLORS = {
@@ -19,18 +22,30 @@ const ACCENT_COLORS = {
 // How far the accent is mixed toward black or white for the dark or light style
 const ACCENT_SHADE = 0.3;
 
+function isDarkStyle(interfaceSettings) {
+    return interfaceSettings.get_string('color-scheme') === 'prefer-dark';
+}
+
 function accentColor(interfaceSettings) {
     // accent-color is new in GNOME 47; GNOME 46 is always blue
     let rgb = ACCENT_COLORS.blue;
     if (interfaceSettings.settings_schema.has_key('accent-color'))
         rgb = ACCENT_COLORS[interfaceSettings.get_string('accent-color')] ?? rgb;
 
-    const target = interfaceSettings.get_string('color-scheme') === 'prefer-dark' ? 0 : 255;
+    const target = isDarkStyle(interfaceSettings) ? 0 : 255;
     return rgb.map(c => Math.round(c + (target - c) * ACCENT_SHADE));
 }
 
+function tintColor(mode, interfaceSettings) {
+    if (mode === TINT_ACCENT)
+        return accentColor(interfaceSettings);
+    if (mode === TINT_AUTO)
+        return TINT_COLORS[isDarkStyle(interfaceSettings) ? TINT_DARK : TINT_LIGHT];
+    return TINT_COLORS[mode];
+}
+
 export function tintStyle(mode, opacityPercent, interfaceSettings, fade = false) {
-    const rgb = mode === TINT_ACCENT ? accentColor(interfaceSettings) : TINT_COLORS[mode];
+    const rgb = tintColor(mode, interfaceSettings);
     if (!rgb || opacityPercent <= 0)
         return 'background-color: transparent; ';
 

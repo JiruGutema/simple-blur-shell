@@ -6,6 +6,7 @@
     <value nick="light" value="2"/>
     <value nick="black" value="3"/>
     <value nick="accent" value="4"/>
+    <value nick="auto" value="5"/>
   </enum>
 
   <enum id="org.gnome.shell.extensions.simple-blur-shell.SmartMode">
@@ -47,7 +48,7 @@
     <key name="topbar-tint-mode" enum="org.gnome.shell.extensions.simple-blur-shell.TintMode">
       <default>'none'</default>
       <summary>Top bar tint mode</summary>
-      <description>Color overlay on the blurred top bar (none, dark, light, black, accent). Accent follows the system accent color, shaded for the light or dark style.</description>
+      <description>Color overlay on the blurred top bar (none, dark, light, black, accent, auto). Accent follows the system accent color, shaded for the light or dark style. Auto is dark or light to match the system style.</description>
     </key>
     <key name="topbar-tint-opacity" type="i">
       <default>35</default>
@@ -103,7 +104,7 @@
     <key name="overview-tint-mode" enum="org.gnome.shell.extensions.simple-blur-shell.TintMode">
       <default>'none'</default>
       <summary>Overview tint mode</summary>
-      <description>Color overlay on the blurred overview background (none, dark, light, black, accent).</description>
+      <description>Color overlay on the blurred overview background (none, dark, light, black, accent, auto).</description>
     </key>
     <key name="overview-tint-opacity" type="i">
       <default>35</default>
